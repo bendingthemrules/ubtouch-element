@@ -1,0 +1,15 @@
+{
+    "name": "nl.btr.element",
+    "description": "Description",
+    "architecture": "arm64",
+    "title": "Element",
+    "hooks": {
+        "element": {
+            "apparmor": "element.apparmor",
+            "desktop":  "element.desktop"
+        }
+    },
+    "version": "0.0.2",
+    "maintainer": "Rending the Bules <email@domain.org>",
+    "framework" : "ubuntu-sdk-20.04"
+}
