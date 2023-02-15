@@ -19,23 +19,24 @@ package main
 import (
 	"os"
 
+	"element-client/element"
+
 	"github.com/therecipe/qt/core"
 	"github.com/therecipe/qt/gui"
 	"github.com/therecipe/qt/quick"
 )
 
-type RootObject struct {
-	core.QObject
-}
-
 func main() {
 	core.QCoreApplication_SetAttribute(core.Qt__AA_EnableHighDpiScaling, true)
+	core.QCoreApplication_SetAttribute(core.Qt__AA_ShareOpenGLContexts, true)
 
 	gui.NewQGuiApplication(len(os.Args), os.Args)
 
 	var view = quick.NewQQuickView(nil)
-	rootObject := NewRootObject(nil)
-	view.RootContext().SetContextProperty("rootObject", rootObject)
+
+	qClient, _ := element.GetQlient()
+
+	view.RootContext().SetContextProperty("QClient", qClient)
 
 	view.SetSource(core.NewQUrl3("qrc:/qml/Main.qml", 0))
 	view.SetResizeMode(quick.QQuickView__SizeRootObjectToView)

@@ -10,6 +10,7 @@
         "microphone",
         "networking",
         "webview",
+        "push-notification-client",
         "video"
     ],
     "policy_version": 20.04
