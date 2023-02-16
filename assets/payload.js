@@ -1,5 +1,5 @@
 const css =
-  '.mx_Dialog{max-width:100vw}.mx_IntegrationManager .mx_Dialog,.mx_Dialog .mx_Dialog_fixedWidth,.mx_ContextualMenu,.mx_EmojiPicker{width:calc(100vw - 56px)!important}div.sc_Body{padding-left:0!important;padding-right:0!important}.mx_TabbedView_tabPanel{margin-left:0!important}.mx_ContextualMenu_wrapper{top:0!important;left:0!important}.mx_ContextualMenu{position:fixed!important;right:initial;left:50%!important;top:50%!important;transform:translate(-50%,-50%)}.mx_ContextualMenu>div:nth-child(2) *,.mx_IconizedContextMenu,.mx_RoomSublist_contextMenu,.mx_CompleteSecurityBody{max-width:100%!important}#mx_SpotlightDialog_keyboardPrompt{display:none}.mx_RightPanel_ResizeWrapper{position:absolute!important;right:0!important;padding-top:0!important}.mx_TabbedView_tabsOnLeft,.mx_TabbedView .mx_TabbedView_tabsOnLeft{position:initial!important;display:initial!important}.mx_TabbedView_tabsOnLeft{position:initial!important}.mx_TabbedView_tabLabels{display:flex;flex-wrap:wrap;width:initial!important;max-width:initial!important;position:initial!important}.mx_SettingsTab .mx_SidebarUserSettingsTab{width:100%!important;min-width:initial!important;padding:0!important}.mx_TabbedView_tabsOnLeft .mx_TabbedView_tabPanel{margin-left:0!important}.mx_AutoHideScrollbar .mx_TabbedView_tabPanelContent>*{min-width:initial!important;padding:0!important}.mx_RoomSettingsDialog .mx_TabbedView .mx_SettingsTab,.mx_SpacePreferencesDialog .mx_TabbedView .mx_SettingsTab,.mx_SpaceSettingsDialog .mx_TabbedView .mx_SettingsTab,.mx_UserSettingsDialog .mx_TabbedView .mx_SettingsTab{min-width:initial!important;padding:0!important}.mx_SettingsTab>*,.mx_SettingsTab_section>*{margin-right:0!important}.mx_MatrixChat .mx_HomePage_default_wrapper>div:nth-child(1){width:100vw!important;padding:0 2rem!important;box-sizing:border-box}.mx_MatrixChat .mx_HomePage_default_buttons{flex-wrap:wrap;justify-content:center}.mx_HomePage_default .mx_HomePage_default_buttons .mx_AccessibleButton:before{left:50%!important;transform:translate(-50%)}.mx_HomePage_default_wrapper .mx_Tooltip{display:none!important}.mx_CompleteSecurityBody{width:100vw!important}';
+  '@media screen and (max-width: 480px){.mx_MatrixChat .mx_LeftPanel_outerWrapper.sidebar{position:absolute;top:0;width:100vw;max-width:100vw;height:100vh;z-index:1000;right:100vw;transition:right .2s ease}.mx_MatrixChat .mx_LeftPanel_outerWrapper.sidebar.active{right:0}.mx_Dialog{max-width:100vw}.mx_IntegrationManager .mx_Dialog,.mx_Dialog .mx_Dialog_fixedWidth,.mx_ContextualMenu,.mx_EmojiPicker{width:calc(100vw - 56px)!important}div.sc_Body{padding-left:0!important;padding-right:0!important}.mx_TabbedView_tabPanel{margin-left:0!important}.mx_ContextualMenu_wrapper{top:0!important;left:0!important}.mx_ContextualMenu{position:fixed!important;right:initial;left:50%!important;top:50%!important;transform:translate(-50%,-50%)}.mx_ContextualMenu>div:nth-child(2) *,.mx_IconizedContextMenu,.mx_RoomSublist_contextMenu,.mx_CompleteSecurityBody{max-width:100%!important}#mx_SpotlightDialog_keyboardPrompt{display:none}.mx_RightPanel_ResizeWrapper{position:absolute!important;right:0!important;padding-top:0!important}.mx_TabbedView_tabsOnLeft,.mx_TabbedView .mx_TabbedView_tabsOnLeft{position:initial!important;display:initial!important}.mx_TabbedView_tabsOnLeft{position:initial!important}.mx_TabbedView_tabLabels{display:flex;flex-wrap:wrap;width:initial!important;max-width:initial!important;position:initial!important}.mx_SettingsTab .mx_SidebarUserSettingsTab{width:100%!important;min-width:initial!important;padding:0!important}.mx_TabbedView_tabsOnLeft .mx_TabbedView_tabPanel{margin-left:0!important}.mx_AutoHideScrollbar .mx_TabbedView_tabPanelContent>*{min-width:initial!important;padding:0!important}.mx_RoomSettingsDialog .mx_TabbedView .mx_SettingsTab,.mx_SpacePreferencesDialog .mx_TabbedView .mx_SettingsTab,.mx_SpaceSettingsDialog .mx_TabbedView .mx_SettingsTab,.mx_UserSettingsDialog .mx_TabbedView .mx_SettingsTab{min-width:initial!important;padding:0!important}.mx_SettingsTab>*,.mx_SettingsTab_section>*{margin-right:0!important}.mx_MatrixChat .mx_HomePage_default_wrapper>div:nth-child(1){width:100vw!important;padding:0 2rem!important;box-sizing:border-box}.mx_MatrixChat .mx_HomePage_default_buttons{flex-wrap:wrap;justify-content:center}.mx_HomePage_default .mx_HomePage_default_buttons .mx_AccessibleButton:before{left:50%!important;transform:translate(-50%)}.mx_HomePage_default_wrapper .mx_Tooltip{display:none!important}.mx_CompleteSecurityBody{width:100vw!important}}';
 
 const head = document.head || document.getElementsByTagName('head')[0];
 const style = document.createElement('style');
@@ -36,11 +36,11 @@ function advancedClose(e) {
 }
 
 function show() {
-  serverBar.style.right = '0';
+  serverBar.classList.add('active');
 }
 
 function hide() {
-  serverBar.style.right = '100vw';
+  serverBar.classList.remove('active');
 }
 
 function addBurger() {
@@ -94,8 +94,7 @@ function init() {
   if (serverBar.getAttribute('listener') !== 'true') {
     console.log('adding listener');
     serverBar.addEventListener('click', advancedClose);
-    serverBar.style =
-      'position:absolute;top:0;width:100vw;max-width:100vw;height:100vh;z-index:1000;right:100vw;transition:right 0.2s ease';
+    serverBar.classList.add('sidebar');
     serverBar.setAttribute('listener', 'true');
   }
 }

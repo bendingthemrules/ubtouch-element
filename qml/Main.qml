@@ -49,17 +49,6 @@ MainView {
         onFeaturePermissionRequested: {
             console.log("feature permission request", feature, securityOrigin)
 
-            // switch(feature) {
-            //     case WebEngineView.MediaAudioCapture:
-            //     case WebEngineView.MediaVideoCapture:
-            //     case WebEngineView.MediaAudioVideoCapture:
-
-            //     var mediaAccessDialog = PopupUtils.open(Qt.resolvedUrl("MediaAccessDialog.qml"), this);
-            //     mediaAccessDialog.origin = securityOrigin;
-            //     mediaAccessDialog.feature = feature;
-            //     break;
-            // }
-
             webEngineView.grantFeaturePermission(securityOrigin, feature, true);
         }
         onFileDialogRequested: function(request) {
