@@ -99,8 +99,16 @@ function init() {
   }
 }
 
-notificationInterval = setInterval(registerNotifications, 1000);
+// ----------------------------
+
+notificationInterval = setInterval(registerNotifications, 250);
 async function registerNotifications() {
+  if (window.location.href.includes('registered=true')) {
+    console.log('already registered');
+    clearInterval(notificationInterval);
+    return;
+  }
+
   const userID = window.localStorage.getItem('mx_user_id');
 
   const settingsButton = document.querySelector(
@@ -124,19 +132,23 @@ async function registerNotifications() {
 
   document
     .querySelector(
-      '#mx_Dialog_StaticContainer > div > div.mx_Dialog > div.mx_UserSettingsDialog.mx_Dialog_fixedWidth > div.mx_SettingsDialog_content > div > div.mx_TabbedView_tabLabels > div:nth-child(10)'
+      '#mx_Dialog_StaticContainer div.mx_Dialog > div.mx_UserSettingsDialog.mx_Dialog_fixedWidth > div.mx_SettingsDialog_content div.mx_TabbedView_tabLabels > div:last-child'
     )
     .click();
 
   // wait for react to update
   await new Promise((r) => setTimeout(r, 75));
 
-  const accessToken = document.querySelector(
-    '#mx_Dialog_StaticContainer > div > div.mx_Dialog > div.mx_UserSettingsDialog.mx_Dialog_fixedWidth > div.mx_SettingsDialog_content > div > div.mx_TabbedView_tabPanel > div > div > div:nth-child(7) > div > details > div'
+  const advancedSection = document.querySelector(
+    '#mx_Dialog_StaticContainer > div > div.mx_Dialog > div.mx_UserSettingsDialog.mx_Dialog_fixedWidth > div.mx_SettingsDialog_content > div > div.mx_TabbedView_tabPanel > div > div > div:last-child'
+  );
+
+  const accessToken = advancedSection.querySelector(
+    'details .mx_CopyableText'
   ).textContent;
 
-  const homeServer = document.querySelector(
-    '#mx_Dialog_StaticContainer > div > div.mx_Dialog > div.mx_UserSettingsDialog.mx_Dialog_fixedWidth > div.mx_SettingsDialog_content > div > div.mx_TabbedView_tabPanel > div > div > div:nth-child(7) > div > div:nth-child(1) > code'
+  const homeServer = advancedSection.querySelector(
+    'div > div:nth-child(1) code'
   ).textContent;
 
   // wait for react to update
@@ -145,7 +157,7 @@ async function registerNotifications() {
   // close modal
   document
     .querySelector(
-      '#mx_Dialog_StaticContainer > div > div.mx_Dialog > div.mx_UserSettingsDialog.mx_Dialog_fixedWidth > div.mx_Dialog_header.mx_Dialog_headerWithCancel > div'
+      '#mx_Dialog_StaticContainer div.mx_Dialog > div.mx_UserSettingsDialog.mx_Dialog_fixedWidth > div.mx_Dialog_header > .mx_Dialog_cancelButton'
     )
     .click();
 

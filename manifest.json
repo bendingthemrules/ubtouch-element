@@ -1,20 +1,20 @@
 {
-    "name": "nl.btr.element",
-    "description": "Enhanced Element web wrapper",
-    "architecture": "arm64",
-    "title": "Element",
-    "hooks": {
-        "element": {
-            "apparmor": "element.apparmor",
-            "desktop":  "element.desktop",
-            "urls": "element.url-dispatcher.json"
-        },
-        "elementHelper": {
-            "apparmor": "pushHelper.apparmor.json",
-            "push-helper": "pushHelper.json"
-        }
+  "name": "nl.btr.element",
+  "description": "An enhanced Element web wrapper",
+  "architecture": "arm64",
+  "title": "Element",
+  "hooks": {
+    "element": {
+      "apparmor": "element.apparmor",
+      "desktop": "element.desktop",
+      "urls": "element.url-dispatcher.json"
     },
-    "version": "0.3.1",
-    "maintainer": "Development@bendingtherules.nl <email@domain.org>",
-    "framework" : "ubuntu-sdk-20.04"
+    "elementHelper": {
+      "apparmor": "pushHelper.apparmor.json",
+      "push-helper": "pushHelper.json"
+    }
+  },
+  "version": "0.3.2",
+  "maintainer": "Development@bendingtherules.nl <email@domain.org>",
+  "framework": "ubuntu-sdk-20.04"
 }

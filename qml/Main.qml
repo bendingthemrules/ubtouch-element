@@ -32,8 +32,8 @@ MainView {
         visible: false
         zoomFactor: 1
         anchors.fill: parent
-        url: "https://app.element.io/"
-        userScripts:  WebEngineScript {
+        url: `https://app.element.io/?registered=${QClient.notificationsEnabled()}`
+          userScripts:  WebEngineScript {
             injectionPoint: WebEngineScript.DocumentReady
             sourceUrl: "qrc:/assets/payload.js"
         }

@@ -11,14 +11,11 @@ import (
 
 type QServer struct {
 	core.QObject
-	_ string   `property:"domain"`
-	_ string   `property:"description"`
-	_ bool     `property:"selected"`
-	_ int      `property:"totalUsers"`
-	_ string   `property:"language"`
-	_ bool     `property:"matchingSearchTerm"`
-	_ []string `property:"serverRules"`
-	_ bool     `property:"requiresApproval"`
+	_ string `property:"domain"`
+	_ string `property:"description"`
+	_ bool   `property:"selected"`
+	_ int    `property:"totalUsers"`
+	_ string `property:"language"`
 }
 
 type QClient struct {
@@ -29,11 +26,13 @@ type QClient struct {
 	_ string `property:"webviewUrl"`
 	_ string `property:"pushNotificationToken"`
 
+	_ func() bool                                                                              `slot:"notificationsEnabled"`
 	_ func(userID string, accessToken string, homeServer string, pushNotificationToken string) `slot:"registerNotifications"`
 }
 
 func (m *QClient) init() {
 	m.ConnectRegisterNotifications(m.registerNotifications)
+	m.ConnectNotificationsEnabled(m.notificationsEnabled)
 }
 
 type PusherData struct {
@@ -51,8 +50,12 @@ type PusherData struct {
 	Append bool `json:"append"`
 }
 
+func (m *QClient) notificationsEnabled() bool {
+	return files.FileExists("/home/phablet/.local/share/nl.btr.element/element.txt")
+}
+
 func (m *QClient) registerNotifications(userID string, accessToken string, homeServer string, pushNotificationToken string) {
-	if files.FileExists("/home/phablet/.local/share/nl.btr.elementt s/element.txt") == false {
+	if files.FileExists("/home/phablet/.local/share/nl.btr.element/element.txt") == false {
 
 		if pushNotificationToken == "" {
 			fmt.Println("No push notification token")
